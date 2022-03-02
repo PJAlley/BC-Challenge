@@ -16,11 +16,11 @@ The `credit_data` table contains a randomly created UUID, the name, the user's (
 
 ### get_random_id.py
 
-After loading the records, get a random UUID from the credit_data table.
+After loading the records, get a random UUID from the `credit_data` table.
 
 ### models.py
 
-Contains the database connections and the schema for the `credit_data` table.
+Contains the database connections and the schema for the `credit_data` table. The columns `name` and `SSN` are labeled **deferred** to indicate that the data from them are only loaded when specifically asked.
 
 ### app.py
 
