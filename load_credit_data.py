@@ -4,6 +4,7 @@ import bz2
 import uuid
 import sqlite3
 
+
 # Open the bzip file and return the lines as a generator.
 def get_lines():
     with bz2.open('test.dat.bz2', mode='rt') as file:
@@ -18,16 +19,17 @@ def get_lines():
 # 9-character entries.
 def process_line(line):
     name = line[0:72].strip()
-    
+
     # Generate the UUID and convert to string.
     uid = str(uuid.uuid4())
-    
+
     # The last character in the string is a newline. Hence, it's not included.
     line = line[72:-1]
     credit_data = [uid, name]
 
     credit_data.extend(list(retrieve(line)))
     return credit_data
+
 
 # convert the remaining string into a list of 9 characters.
 def retrieve(line):
@@ -89,11 +91,13 @@ def bulk_insert_data(db, data):
     cursor.executemany(insert_query, data)
     db.commit()
 
+
 def get_total_count(db):
     cursor = db.cursor();
     cursor.execute("select count(*) from credit_data")
     sql_count = cursor.fetchone()[0]
     return sql_count
+
 
 def main():
     db = sqlite3.connect('credit.db')
@@ -109,7 +113,8 @@ def main():
             print(f"Inserting {i} records...")
             bulk_insert_data(db, credit_data)
             credit_data = []
-        
+
+    # load the remainder of the data.
     bulk_insert_data(db, credit_data)
     records = get_total_count(db)
     print(f"{records} records inserted.")

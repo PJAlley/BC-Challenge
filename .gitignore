@@ -14,3 +14,6 @@ venv.bak/
 
 # DB files
 credit.db
+
+# Data files
+test.dat.bz2
