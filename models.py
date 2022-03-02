@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, deferred
 
 # database config
 
@@ -19,8 +19,8 @@ class CreditData(Base):
     __tablename__ = "credit_data"
 
     uuid = Column(String(36), primary_key=True)
-    name = Column(String(72))
-    SSN = Column(String(9))
+    name = deferred(Column(String(72)))
+    SSN = deferred(Column(String(9)))
     X0001 = Column(Integer)
     X0002 = Column(Integer)
     X0003 = Column(Integer)

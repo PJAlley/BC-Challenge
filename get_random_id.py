@@ -10,5 +10,6 @@ def get_random_user():
     print(uuid)
     db.close()
 
+
 if __name__ == "__main__":
     get_random_user()

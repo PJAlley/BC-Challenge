@@ -10,10 +10,10 @@ app = FastAPI()
 
 
 # Grab all the information about a user.
-@app.get("/user/{user_id}")
-async def get_user(user_id: str):
+@app.get("/user/{user_uuid}")
+async def get_user(user_uuid: str):
     db = SessionLocal()
-    user = db.query(CreditData).filter(CreditData.uuid == user_id).first()
+    user = db.query(CreditData).filter(CreditData.uuid == user_uuid).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found.")
     db.close()
